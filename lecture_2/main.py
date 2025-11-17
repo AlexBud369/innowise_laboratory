@@ -29,10 +29,21 @@ def collect_hobbies():
 
     return hobbies
 
+def create_profile(name, age, life_stage, hobbies):
+
+    return {
+        "name": name,
+        "age": age,
+        "life_stage": life_stage,
+        "hobbies": hobbies
+    }
+
 def main():
     user_name, birth_year, current_age = get_user_info()
     hobbies = collect_hobbies()
     life_stage = generate_profile(current_age)
+
+    user_profile = create_profile(user_name, current_age, life_stage, hobbies)
 
 if __name__ == "__main__":
     main()
