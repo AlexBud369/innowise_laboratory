@@ -38,12 +38,30 @@ def create_profile(name, age, life_stage, hobbies):
         "hobbies": hobbies
     }
 
+
+def user_profile_output(user_profile):
+    print("---")
+    print("Profile Summary: ")
+    print(f"Name: {user_profile['name']}")
+    print(f"Age: {user_profile['age']}")
+    print(f"Life_stage: {user_profile['life_stage']}")
+
+    if not user_profile['hobbies']:
+        print("You didn't mention any hobbies")
+    else:
+        print(f"Favorite hobbies ({len(user_profile['hobbies'])}): ")
+        for hobby in user_profile['hobbies']:
+            print(f"- {hobby}")
+    print("---")
+
+
 def main():
     user_name, birth_year, current_age = get_user_info()
     hobbies = collect_hobbies()
     life_stage = generate_profile(current_age)
 
     user_profile = create_profile(user_name, current_age, life_stage, hobbies)
+    user_profile_output(user_profile)
 
 if __name__ == "__main__":
     main()
