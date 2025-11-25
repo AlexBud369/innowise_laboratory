@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 StudentDict = Dict[str, List[int] | str]
 StudentList = List[StudentDict]
@@ -16,12 +16,46 @@ def output_menu_text() -> None:
     print("5. Exit program")
 
 
+def find_student_by_name(name: str) -> Optional[StudentDict]:
+    """
+    Find a student by name (case-insensitive).
+    """
+    for student in students:
+        if student["name"].lower() == name.lower():
+            return student
+    return None
+
+
+def student_exists(name: str) -> bool:
+    """
+    Check if a student already exists
+    """
+    return find_student_by_name(name) is not None
+
+
+def add_new_student() -> None:
+    """Add a new student to the system"""
+    while True:
+        name = input("Enter student name: ").strip()
+
+        if not name:
+            print("Student name cannot be empty! Please try again")
+            continue
+
+        if student_exists(name):
+            print("Student already exists! Please try a different name")
+            continue
+
+        students.append({"name": name, "grades": []})
+        break
+
+
 def switch(choice: int) -> bool:
     """
     Handle menu choice selection.
     """
     if choice == 1:
-        print("1. Add a new student")
+        add_new_student()
     elif choice == 2:
         print("2. Add grades for a student")
     elif choice == 3:
