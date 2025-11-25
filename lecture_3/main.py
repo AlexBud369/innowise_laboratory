@@ -123,6 +123,28 @@ def generate_report() -> None:
         print("\nNo grades available for statistics")
 
 
+def find_top_student() -> None:
+    """Find and display the student with the highest average grade."""
+    students_with_grades = [student for student in students if student["grades"]]
+
+    if not students_with_grades:
+        print("No students with grades available!")
+        return
+
+    try:
+        top_student = max(
+            students_with_grades,
+            key=lambda student: sum(student["grades"]) / len(student["grades"]),
+        )
+        top_avg = sum(top_student["grades"]) / len(top_student["grades"])
+        print(
+            f"The student with the highest average is"
+            f" {top_student['name']} with a grade of {top_avg:.1f}"
+        )
+    except (ValueError, ZeroDivisionError):
+        print("Error calculating top student!")
+
+
 def switch(choice: int) -> bool:
     """
     Handle menu choice selection.
@@ -134,7 +156,7 @@ def switch(choice: int) -> bool:
     elif choice == 3:
         generate_report()
     elif choice == 4:
-        print("4. Find the top student")
+        find_top_student()
     elif choice == 5:
         print("Exiting program.")
         return True
