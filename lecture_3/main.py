@@ -87,6 +87,42 @@ def add_grades() -> None:
             print("Invalid input. Please enter a number")
 
 
+def calculate_average(grades: List[int]) -> float:
+    """
+    Calculate average of grades, handling empty list
+    """
+    if not grades:
+        return 0.0
+    return sum(grades) / len(grades)
+
+
+def generate_report() -> None:
+    """Generate report of all students with statistics"""
+    if not students:
+        print("No students available!")
+        return
+
+    print("\n--- Student Report ---")
+    averages = []
+
+    for student in students:
+        grades = student["grades"]
+
+        if grades:
+            average = calculate_average(grades)
+            averages.append(average)
+            print(f"{student['name']}'s average grade is {average:.1f}")
+        else:
+            print(f"{student['name']}'s average grade is N/A")
+
+    if averages:
+        print(f"\nMax Average: {max(averages):.1f}")
+        print(f"Min Average: {min(averages):.1f}")
+        print(f"Overall Average: {sum(averages) / len(averages):.1f}")
+    else:
+        print("\nNo grades available for statistics")
+
+
 def switch(choice: int) -> bool:
     """
     Handle menu choice selection.
@@ -96,7 +132,7 @@ def switch(choice: int) -> bool:
     elif choice == 2:
         add_grades()
     elif choice == 3:
-        print("3. Generate report for all students")
+        generate_report()
     elif choice == 4:
         print("4. Find the top student")
     elif choice == 5:
