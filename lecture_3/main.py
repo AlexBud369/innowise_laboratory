@@ -50,6 +50,43 @@ def add_new_student() -> None:
         break
 
 
+def is_valid_grade(grade: int) -> bool:
+    """
+    Check if grade is within valid range.
+    """
+    return 0 <= grade <= 100
+
+
+def add_grades() -> None:
+    """Add grades for a specific student."""
+    while True:
+        name = input("Enter student name: ").strip()
+        student = find_student_by_name(name)
+
+        if not student:
+            print(f"Student '{name}' not found! Please try again")
+            continue
+
+        break
+
+    print(f"Adding grades for {student['name']}.")
+
+    while True:
+        grade_input = input("Enter a grade (or 'done' to finish): ").strip().lower()
+
+        if grade_input == "done":
+            break
+
+        try:
+            grade = int(grade_input)
+            if is_valid_grade(grade):
+                student["grades"].append(grade)
+            else:
+                print("Grade must be between 0 and 100! Please try again")
+        except ValueError:
+            print("Invalid input. Please enter a number")
+
+
 def switch(choice: int) -> bool:
     """
     Handle menu choice selection.
@@ -57,7 +94,7 @@ def switch(choice: int) -> bool:
     if choice == 1:
         add_new_student()
     elif choice == 2:
-        print("2. Add grades for a student")
+        add_grades()
     elif choice == 3:
         print("3. Generate report for all students")
     elif choice == 4:
