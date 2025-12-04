@@ -91,11 +91,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-
-# *.db
-# *.sqlite
-# db.sqlite3
-
 # Instead, only ignore other SQLite files:
 test.db
 temp.db
