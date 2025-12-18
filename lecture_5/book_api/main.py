@@ -14,7 +14,7 @@ app = FastAPI()
 
 @app.post("/books/", response_model=schemas.BookResponse)
 def create_book(
-        book: schemas.BookCreate, db: Session = Depends(get_db)
+    book: schemas.BookCreate, db: Session = Depends(get_db)
 ) -> schemas.BookResponse:
     """
     Create a new book in the collection.
@@ -38,9 +38,9 @@ def create_book(
 
 @app.get("/books/", response_model=List[schemas.BookResponse])
 def read_books(
-        skip: int = Query(0, ge=0),
-        limit: int = Query(10, ge=1, le=100),
-        db: Session = Depends(get_db),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(10, ge=1, le=100),
+    db: Session = Depends(get_db),
 ) -> List[schemas.BookResponse]:
     """
     Get all books with pagination support.
@@ -81,7 +81,7 @@ def delete_book(book_id: int, db: Session = Depends(get_db)) -> dict[str, str]:
 
 @app.put("/books/{book_id}", response_model=schemas.BookResponse)
 def update_book(
-        book_id: int, book_update: schemas.BookUpdate, db: Session = Depends(get_db)
+    book_id: int, book_update: schemas.BookUpdate, db: Session = Depends(get_db)
 ) -> schemas.BookResponse:
     """
     Update book details by ID.
@@ -115,10 +115,10 @@ def update_book(
 
 @app.get("/books/search/", response_model=List[schemas.BookResponse])
 def search_books(
-        title: Optional[str] = Query(None),
-        author: Optional[str] = Query(None),
-        year: Optional[int] = Query(None),
-        db: Session = Depends(get_db),
+    title: Optional[str] = Query(None),
+    author: Optional[str] = Query(None),
+    year: Optional[int] = Query(None),
+    db: Session = Depends(get_db),
 ) -> List[schemas.BookResponse]:
     """
     Search books by title, author, or year.
